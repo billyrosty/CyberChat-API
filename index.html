@@ -1,0 +1,347 @@
+<!doctype html>
+<!--
+  Landing page for the CyberChat API Maven repository.
+
+  The repository itself is a directory tree of artifacts, so hitting its root
+  in a browser used to return a 404. The release workflow copies this file to
+  the publish directory and fills in the version placeholder from the tag, so
+  the root now answers with the same instructions as API_README.md. Keep the
+  two in step -- and note that the placeholder is a plain word substituted by
+  sed, so do not write it anywhere it should survive.
+
+  Highlighting is hand-written spans rather than a library. The code blocks
+  never change without someone editing this file, so a syntax highlighter
+  would be a dependency bought for nothing.
+
+  Same layout as the CyberFactions API page, in CyberChat's own palette:
+  teal where that one is magenta.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CyberChat API</title>
+<meta name="description" content="Public Maven repository and API reference for building plugins that interact with CyberChat.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-soft:#e9f4f4;
+  --bg-code:#f4fafa;
+  --ink:#0b2426;
+  --ink-2:#3d5a5d;
+  --ink-3:#63807f;
+  --rule:#cfe3e3;
+  --rule-soft:#e2eeee;
+  --blue:#2d6ea8;
+  --teal:#0b6e75;
+  --teal-2:#0d8a90;
+
+  /* Syntax. Three hues and a muted grey: teal for keywords and tags,
+     blue for the things you call, amber for anything quoted. */
+  --syn-key:#0b6e75;
+  --syn-fn:#215f92;
+  --syn-str:#8a5a12;
+  --syn-num:#6b30b8;
+  --syn-com:#7d8f8e;
+  --syn-punct:#5f7472;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#07191b;
+    --bg-soft:#0d2528;
+    --bg-code:#041215;
+    --ink:#e8f3f2;
+    --ink-2:#adc6c5;
+    --ink-3:#7d9997;
+    --rule:#17383c;
+    --rule-soft:#122e31;
+    --blue:#68b6e8;
+    --teal:#7ddfe0;
+    --teal-2:#4fc5cb;
+
+    --syn-key:#6fd8d6;
+    --syn-fn:#8ecbf5;
+    --syn-str:#e6b980;
+    --syn-num:#c8a2f5;
+    --syn-com:#6b8483;
+    --syn-punct:#8ba5a3;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#07191b;
+  --bg-soft:#0d2528;
+  --bg-code:#041215;
+  --ink:#e8f3f2;
+  --ink-2:#adc6c5;
+  --ink-3:#7d9997;
+  --rule:#17383c;
+  --rule-soft:#122e31;
+  --blue:#68b6e8;
+  --teal:#7ddfe0;
+  --teal-2:#4fc5cb;
+
+  --syn-key:#6fd8d6;
+  --syn-fn:#8ecbf5;
+  --syn-str:#e6b980;
+  --syn-num:#c8a2f5;
+  --syn-com:#6b8483;
+  --syn-punct:#8ba5a3;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:56px 24px 96px}
+
+header{border-bottom:1px solid var(--rule);padding-bottom:28px;margin-bottom:8px}
+.lockup{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.lockup img{width:min(100%,300px);height:auto;display:block}
+.lockup .api{
+  font:700 15px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--teal-2);
+  padding:7px 12px;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  white-space:nowrap;
+}
+h1{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+.tagline{color:var(--ink-2);margin:0 0 18px;font-size:18px;max-width:60ch}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{
+  font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.04em;
+  padding:7px 11px;
+  border-radius:20px;
+  background:var(--bg-soft);
+  border:1px solid var(--rule);
+  color:var(--ink-2);
+}
+.badge.v{border-color:var(--teal-2);color:var(--teal)}
+
+h2{
+  font-size:22px;
+  letter-spacing:-.01em;
+  margin:44px 0 6px;
+  padding-top:22px;
+  border-top:1px solid var(--rule);
+}
+h2:first-of-type{border-top:0;padding-top:0}
+h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:26px 0 6px}
+p{margin:0 0 1em;color:var(--ink-2)}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+
+pre{
+  background:var(--bg-code);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:14px 16px;
+  overflow-x:auto;
+  margin:10px 0 18px;
+}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;font-size:13.5px}
+p code,td code{
+  background:var(--bg-soft);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:.1em .35em;
+  font-size:.88em;
+}
+pre code{background:none;border:0;padding:0;color:var(--ink-2);white-space:pre}
+
+/* syntax */
+.k{color:var(--syn-key)}
+.f{color:var(--syn-fn)}
+.s{color:var(--syn-str)}
+.n{color:var(--syn-num)}
+.c{color:var(--syn-com);font-style:italic}
+.o{color:var(--syn-punct)}
+.t{color:var(--syn-key)}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;margin:14px 0 20px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{background:var(--bg-soft);font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+
+.note{
+  border:1px solid var(--rule);
+  border-left:3px solid var(--blue);
+  border-radius:0 8px 8px 0;
+  background:var(--bg-soft);
+  padding:14px 18px;
+  margin:22px 0;
+}
+.note.beta{border-left-color:#b07316}
+.note p:last-child{margin-bottom:0}
+
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>CyberChat API</h1>
+  <div class="lockup">
+    <img src="logo.png" alt="CyberChat" width="1791" height="878">
+    <span class="api">API</span>
+  </div>
+  <p class="tagline">Public API for building plugins that interact with CyberChat — a cross-server chat plugin for Paper 1.21.4+ and Velocity.</p>
+  <div class="badges">
+    <span class="badge v">0.1.0-beta.1</span>
+    <span class="badge">fr.billyrosty:cyberchat-api</span>
+    <span class="badge">MIT</span>
+    <span class="badge">Java 21</span>
+  </div>
+</header>
+
+<div class="note">
+  <p>This host is a <strong>Maven repository</strong>. Point your build tool at
+  <code>https://billyrosty.github.io/CyberChat-API</code> — there is nothing to download
+  by hand.</p>
+</div>
+
+<div class="note beta">
+  <p><strong>Pre-1.0.</strong> Signatures may be added to, renamed or removed between versions
+  without a deprecation period until CyberChat reaches a stable release. Pin an exact version
+  rather than a range.</p>
+</div>
+
+<h2>Installation</h2>
+
+<h3>Gradle · Kotlin DSL</h3>
+<pre><code><span class="f">repositories</span> <span class="o">{</span>
+    <span class="f">maven</span><span class="o">(</span><span class="s">"https://billyrosty.github.io/CyberChat-API"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="f">dependencies</span> <span class="o">{</span>
+    <span class="f">compileOnly</span><span class="o">(</span><span class="s">"fr.billyrosty:cyberchat-api:0.1.0-beta.1"</span><span class="o">)</span>
+<span class="o">}</span></code></pre>
+
+<h3>Gradle · Groovy DSL</h3>
+<pre><code><span class="f">repositories</span> <span class="o">{</span>
+    <span class="f">maven</span> <span class="o">{</span> <span class="k">url</span> <span class="s">'https://billyrosty.github.io/CyberChat-API'</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="f">dependencies</span> <span class="o">{</span>
+    <span class="f">compileOnly</span> <span class="s">'fr.billyrosty:cyberchat-api:0.1.0-beta.1'</span>
+<span class="o">}</span></code></pre>
+
+<h3>Maven</h3>
+<pre><code><span class="o">&lt;</span><span class="t">repositories</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="t">repository</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">id</span><span class="o">&gt;</span>cyberchat<span class="o">&lt;/</span><span class="t">id</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">url</span><span class="o">&gt;</span>https://billyrosty.github.io/CyberChat-API<span class="o">&lt;/</span><span class="t">url</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="t">repository</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="t">repositories</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="t">dependencies</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="t">dependency</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">groupId</span><span class="o">&gt;</span>fr.billyrosty<span class="o">&lt;/</span><span class="t">groupId</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">artifactId</span><span class="o">&gt;</span>cyberchat-api<span class="o">&lt;/</span><span class="t">artifactId</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">version</span><span class="o">&gt;</span>0.1.0-beta.1<span class="o">&lt;/</span><span class="t">version</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="t">scope</span><span class="o">&gt;</span>provided<span class="o">&lt;/</span><span class="t">scope</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="t">dependency</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="t">dependencies</span><span class="o">&gt;</span></code></pre>
+
+<h3>plugin.yml</h3>
+<pre><code><span class="f">name</span><span class="o">:</span> MyPlugin
+<span class="f">version</span><span class="o">:</span> <span class="n">1.0.0</span>
+<span class="f">main</span><span class="o">:</span> com.example.myplugin.MyPlugin
+<span class="f">depend</span><span class="o">:</span> <span class="o">[</span>CyberChat<span class="o">]</span></code></pre>
+<p>Use <code>softdepend</code> instead if your plugin should still load without CyberChat, and
+guard every call with <code>CyberChatAPIProvider.isAvailable()</code>.</p>
+
+<h2>Quick start</h2>
+<pre><code><span class="k">import</span> fr.billyrosty.cyberchat.api.<span class="t">CyberChatAPI</span><span class="o">;</span>
+<span class="k">import</span> fr.billyrosty.cyberchat.api.model.<span class="t">ChannelDefinition</span><span class="o">;</span>
+
+<span class="k">public class</span> <span class="t">MyPlugin</span> <span class="k">extends</span> <span class="t">JavaPlugin</span> <span class="o">{</span>
+
+    <span class="k">@Override</span>
+    <span class="k">public void</span> <span class="f">onEnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="t">CyberChatAPI</span> api <span class="o">=</span> <span class="t">CyberChatAPI</span><span class="o">.</span><span class="f">getInstance</span><span class="o">();</span>
+
+        <span class="c">// A channel that lives only in memory, but behaves exactly like one</span>
+        <span class="c">// in channels.yml. It does not survive a restart -- register again.</span>
+        api<span class="o">.</span><span class="f">getChannelService</span><span class="o">().</span><span class="f">register</span><span class="o">(</span><span class="t">ChannelDefinition</span><span class="o">.</span><span class="f">builder</span><span class="o">(</span><span class="s">"trade"</span><span class="o">)</span>
+                <span class="o">.</span><span class="f">alias</span><span class="o">(</span><span class="s">"tr"</span><span class="o">)</span>
+                <span class="o">.</span><span class="f">speakPermission</span><span class="o">(</span><span class="s">"myplugin.trade"</span><span class="o">)</span>
+                <span class="o">.</span><span class="f">cooldownSeconds</span><span class="o">(</span><span class="n">5</span><span class="o">)</span>
+                <span class="o">.</span><span class="f">crossServer</span><span class="o">(</span><span class="k">true</span><span class="o">)</span>
+                <span class="o">.</span><span class="f">build</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+
+<h2>Services</h2>
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr><th>Service</th><th>Access</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>ChannelService</code></td><td><code>api.getChannelService()</code></td><td>List and look up channels, register your own, move players, broadcast</td></tr>
+    <tr><td><code>PlayerService</code></td><td><code>api.getPlayerService()</code></td><td>A player's channel, mutes, toggles, ignores and nickname</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Events</h2>
+<p>Every event extends <code>CyberChatEvent</code>, so a listener can catch the family at once.</p>
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr><th>Event</th><th>When</th><th>Cancellable</th><th>Thread</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>CyberChatMessageEvent</code></td><td>A chat line, after every CyberChat check passed</td><td>yes</td><td>async</td></tr>
+    <tr><td><code>CyberChatChannelSwitchEvent</code></td><td>A player changes their active channel</td><td>yes</td><td>main</td></tr>
+    <tr><td><code>CyberChatPrivateMessageEvent</code></td><td>A private message is about to go out</td><td>yes</td><td>async</td></tr>
+    <tr><td><code>CyberChatMuteEvent</code></td><td>A mute was issued or lifted</td><td>no</td><td>main</td></tr>
+  </tbody>
+</table>
+</div>
+<p>The two asynchronous events fire off the main thread, like Paper's own
+<code>AsyncChatEvent</code>. A listener must not touch other Bukkit API from them — hop back to
+the main thread first.</p>
+
+<pre><code><span class="k">@EventHandler</span>
+<span class="k">public void</span> <span class="f">onChat</span><span class="o">(</span><span class="t">CyberChatMessageEvent</span> event<span class="o">)</span> <span class="o">{</span>
+    <span class="c">// The formatted line, {cc:...} tokens still unresolved -- they expand</span>
+    <span class="c">// per recipient, on whichever server that recipient is connected to.</span>
+    <span class="k">if</span> <span class="o">(</span>event<span class="o">.</span><span class="f">getChannelId</span><span class="o">().</span><span class="f">equals</span><span class="o">(</span><span class="s">"trade"</span><span class="o">))</span> <span class="o">{</span>
+        event<span class="o">.</span><span class="f">setMessage</span><span class="o">(</span><span class="s">"&lt;gray&gt;[Trade]&lt;/gray&gt; "</span> <span class="o">+</span> event<span class="o">.</span><span class="f">getMessage</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+
+<h2>Relational tokens</h2>
+<p>The reason CyberChat exists: a message travels the network as a template and is resolved once
+per recipient, so <code>{cc:rel:&lt;papi placeholder&gt;}</code> in a <code>formats.yml</code>
+template renders differently for every reader. That happens below this API — a listener sees the
+template, not the rendered line any one viewer gets. Rewriting the message keeps the tokens
+intact.</p>
+
+<h2>Documentation</h2>
+<p>Full documentation with examples:
+<a href="https://billyrosty.github.io/CyberFactions-Docs/cyberchat/api/">billyrosty.github.io/CyberFactions-Docs</a></p>
+
+<footer>
+  <p style="margin:0">MIT — see <a href="LICENSE">LICENSE</a>. Also available as
+  <a href="README.md">README.md</a>. The plugin itself is licensed separately.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "fr.billyrosty",
+    "module": "cyberchat-api",
+    "version": "0.1.0-beta.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "cyberchat-api-0.1.0-beta.1.jar",
+          "url": "cyberchat-api-0.1.0-beta.1.jar",
+          "size": 16364,
+          "sha512": "545ada989bdb336944d72e817b8bfbdc6932e8c57f5787d252ac9a14571f2072e71b4d27a14c33a721c685cc8d657598d5b2890bdb7e0b65e523612e73f34804",
+          "sha256": "035a5961688e173f3743f527b6f2a86a97ab27a3caafec3b8595ea7657cf73a0",
+          "sha1": "8cd7a09f8247259ae82705081659ba706d097ea2",
+          "md5": "de52baccea7dcb211816685daf1787c8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "cyberchat-api-0.1.0-beta.1.jar",
+          "url": "cyberchat-api-0.1.0-beta.1.jar",
+          "size": 16364,
+          "sha512": "545ada989bdb336944d72e817b8bfbdc6932e8c57f5787d252ac9a14571f2072e71b4d27a14c33a721c685cc8d657598d5b2890bdb7e0b65e523612e73f34804",
+          "sha256": "035a5961688e173f3743f527b6f2a86a97ab27a3caafec3b8595ea7657cf73a0",
+          "sha1": "8cd7a09f8247259ae82705081659ba706d097ea2",
+          "md5": "de52baccea7dcb211816685daf1787c8"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "cyberchat-api-0.1.0-beta.1-sources.jar",
+          "url": "cyberchat-api-0.1.0-beta.1-sources.jar",
+          "size": 14652,
+          "sha512": "ea8bf69688bd0d6104b5a220a9cfa2c8699031d46f369e95c93d067a46a7426c0fc349b1fd8989f966e098cca82fe49363c77f0552028378e2a51d524b17d17f",
+          "sha256": "7cd8bde20e5d0dc825c6d42a6f8153c0274e4002f567a13e33d049e09de3a72f",
+          "sha1": "5168be4b5b05c79b2d4acc002787a9f6ef6d3c19",
+          "md5": "0b9c0333bff11bf488565703605be956"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "cyberchat-api-0.1.0-beta.1-javadoc.jar",
+          "url": "cyberchat-api-0.1.0-beta.1-javadoc.jar",
+          "size": 164546,
+          "sha512": "a3d632ca8259e717d1a62c4c4260f71bbd80c3ee0d10c4c43724f4b2b307f5a393c1313d575b1849e98eb27adbffef066d64f6a2a4de63fb4a84d10f5466883e",
+          "sha256": "406cf8724b61b1acc80d468d35fb435f65ce33e4b0efe5541600d1a161f1f4e7",
+          "sha1": "29533c6556ce2b28247b12434b298317bc914309",
+          "md5": "e7d0967e1b9fe6cc7204dabbf712e9a4"
+        }
+      ]
+    }
+  ]
+}
